@@ -103,16 +103,16 @@ public class Interfaz extends JFrame implements ActionListener{
 			ruta=new HiloRuta(panel,Color.green,origen,destino);
 			System.err.println(origen+","+destino+","+"aceptar");
 			
-			hilo=new HiloTaxi(taxi, panel,origen, destino);
-			//hilo.start();
+			/*hilo=new HiloTaxi(taxi, panel,origen, destino);
+			hilo.start();*/
 			
-			if(ruta.isAlive()&& hilo.isAlive()){
+			if(ruta.isAlive()){//&& hilo.isAlive()){
 				ruta.resume();
-				hilo.resume();
+				//hilo.resume();
 			}
 			else
 				ruta.start();
-				hilo.start();
+				//hilo.start();
 				
 		
 		}
