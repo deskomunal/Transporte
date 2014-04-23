@@ -19,8 +19,19 @@ public class Interfaz extends JFrame implements ActionListener{
 	private JButton jbt_cancelar;
 	private JLabel jlb_origen;
 	private JLabel jlb_destino;
-	private JTextField txt_origen;
-	private JTextField txt_destino;
+	
+	private JComboBox jcb_oriVer;
+	private String [] vertical={"Av. Ayacucho","Nataniel Aguirre",
+			"Esteban Arce", "25 de Mayo"," San Martin"," Lanza",
+			" Antezana"," 16 de Julio"," Av. Oquendo "};
+	private JComboBox jcb_oriHori;
+	private String [] horizontal={"Av. Heroinas","Bolivar","Sucre",
+			"Jordan","Calama","Ladislao Cabrera","Uruguay","Aroma"};
+	private JComboBox jcb_desVer;
+	private JComboBox jcb_desHori;
+	
+	private JTextArea area; 
+
 	private Taxi taxi;
 	
 	private HiloRuta ruta;
@@ -34,7 +45,7 @@ public class Interfaz extends JFrame implements ActionListener{
 	
 	public Interfaz(){
 		super("Transporte y Diseño");
-		setBounds(140,140,800,600);
+		setBounds(140,140,800,650);
 		setLayout(null);
 		
 		setResizable(false);
@@ -58,8 +69,12 @@ public class Interfaz extends JFrame implements ActionListener{
 		jbt_aceptar=new JButton("aceptar");
 		jbt_cancelar=new JButton("cancelar");
 		
-		txt_origen=new JTextField();
-		txt_destino=new JTextField();
+		
+		jcb_oriVer=new JComboBox(vertical);
+		jcb_oriHori=new JComboBox(horizontal);
+		jcb_desVer=new JComboBox(vertical);
+		jcb_desHori=new JComboBox(horizontal);
+		
 		jlb_origen=new JLabel("Origen:");
 		jlb_destino=new JLabel("Destino:");
 		
@@ -68,40 +83,55 @@ public class Interfaz extends JFrame implements ActionListener{
 		color=color.black;
 		borde=new MatteBorder(2,2,2,2,color);
 		panel.setBorder(borde);
-		
-		
-		jlb_origen.setBounds(630,50,60,20);
-		jlb_destino.setBounds(630,80,60,20);
-		txt_origen.setBounds(680,50, 30, 20);
-		txt_destino.setBounds(680,80, 30, 20);
-		
-		jbt_aceptar.setBounds(630,130, 85, 20);
-		jbt_cancelar.setBounds(630,160, 85, 20);
+		area=new JTextArea();
+		area.setLayout(new BorderLayout());
+		area.setBorder(borde);
+		scroll=new JScrollPane(area);
+		scroll.setBounds(50,500,542,100);
 
-		scroll=new JScrollPane(panel);
-		//scroll.setViewportView(panel);
 		
-		scroll.setBounds(50,50,542,437);
+		
+		jlb_origen.setBounds(610,50,60,20);
+		jlb_destino.setBounds(610,110,60,20);
+		
+		jcb_oriVer.setBounds(660,50, 118, 20);
+		jcb_oriHori.setBounds(660,80, 118, 20);
+		
+		jcb_desVer.setBounds(660,110, 118, 20);
+		jcb_desHori.setBounds(660,140, 118, 20);
+		
+		jbt_aceptar.setBounds(610,180, 85, 20);
+		jbt_cancelar.setBounds(610,210, 85, 20);
+
+		
+		
+		panel.setBounds(50,50,542,437);
 		
 		
 		
 		
 		add(jlb_origen);
 		add(jlb_destino);
-		add(txt_origen);
-		add(txt_destino);
+		add(jcb_oriVer);
+		add(jcb_oriHori);
+		add(jcb_desVer);
+		add(jcb_desHori);
 		add(jbt_aceptar);
 		add(jbt_cancelar);
+		add(panel);
 		add(scroll);
 
 		
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==jbt_aceptar){
-			int origen=Integer.parseInt(txt_origen.getText());
-			int destino=Integer.parseInt(txt_destino.getText());
-			ruta=new HiloRuta(panel,Color.green,origen,destino);
-			System.err.println(origen+","+destino+","+"aceptar");
+			Object x = jcb_oriHori.getSelectedItem();
+			Object y = jcb_oriVer.getSelectedItem();
+			Object z = jcb_desHori.getSelectedItem();
+			Object k = jcb_desVer.getSelectedItem();
+			
+			ruta=new HiloRuta(panel,Color.green,11,520);
+			System.err.println(jcb_oriVer+","+jcb_oriHori+","+jcb_desVer+","+jcb_desHori+","+"aceptar");
 			
 			/*hilo=new HiloTaxi(taxi, panel,origen, destino);
 			hilo.start();*/
@@ -117,8 +147,9 @@ public class Interfaz extends JFrame implements ActionListener{
 		
 		}
 		else if(e.getSource()==jbt_cancelar){
-			txt_origen.setText("");
-			txt_destino.setText("");
+			
+			panel.repaint();
+			
 		}
 	
 }

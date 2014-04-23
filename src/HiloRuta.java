@@ -23,7 +23,7 @@ public class HiloRuta extends Thread{
 			
 			for(int i=origen;i<destino;i++){
 				g.setColor(color);
-				g.fillOval(i,60,8,8);
+				g.fillOval(i,8,5,5);
 				Thread.sleep(5);
 				 /*g.setColor (Color.white);
 			    g.fillOval (i, 30, 5, 5);

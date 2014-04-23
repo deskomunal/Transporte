@@ -8,7 +8,7 @@ public class Fondo extends JPanel{
 	public Fondo(){
 		super();
 		inicializar();
-		imagen_fondo=new ImageIcon("imagenes/fondo1.gif");
+		imagen_fondo=new ImageIcon("imagenes/fondoMap.png");
 		setSize(imagen_fondo.getIconWidth(),imagen_fondo.getIconHeight());
 	}
 	public void paint(Graphics g){
